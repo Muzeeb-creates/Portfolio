@@ -11,10 +11,12 @@ export default function BackgroundCanvas() {
   const animationFrameIdRef = useRef(null);
   const [initialFrameReady, setInitialFrameReady] = useState(false);
 
-  // Helper to format frame path
+  // Helper to format frame path with production-safe URL
   const getFrameSrc = (index) => {
     const padded = String(index).padStart(3, '0');
-    return `/Video_frames/ezgif-frame-${padded}.jpg`;
+    const base = import.meta.env.BASE_URL || '/';
+    const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+    return `${normalizedBase}Video_frames/ezgif-frame-${padded}.jpg`;
   };
 
   useEffect(() => {
@@ -76,7 +78,20 @@ export default function BackgroundCanvas() {
         offsetY = 0;
       }
 
-      ctx.drawImage(targetImg, offsetX, offsetY, drawWidth, drawHeight);
+      try {
+        ctx.drawImage(targetImg, offsetX, offsetY, drawWidth, drawHeight);
+      } catch (err) {
+        // Safe catch if image state is invalid during drawing
+      }
+    };
+
+    let hasRenderedInitial = false;
+    const markInitialRender = (frameToRender = 1) => {
+      if (!hasRenderedInitial) {
+        hasRenderedInitial = true;
+        setInitialFrameReady(true);
+        renderFrame(frameToRender);
+      }
     };
 
     // Load initial frame 1 with priority
@@ -85,8 +100,11 @@ export default function BackgroundCanvas() {
     imagesRef.current[1] = firstImg;
     firstImg.onload = () => {
       loadedCountRef.current += 1;
-      setInitialFrameReady(true);
-      renderFrame(1);
+      markInitialRender(1);
+    };
+    firstImg.onerror = () => {
+      // Mark ready if frame 1 errors so fallback logic can render other frames as they load
+      markInitialRender(1);
     };
 
     // Background preloader for all remaining frames
@@ -97,6 +115,10 @@ export default function BackgroundCanvas() {
         imagesRef.current[i] = img;
         img.onload = () => {
           loadedCountRef.current += 1;
+          markInitialRender(Math.round(currentFrameRef.current));
+        };
+        img.onerror = () => {
+          // Gracefully continue without crashing; fallback logic will use nearest available frame
         };
       }
     };
