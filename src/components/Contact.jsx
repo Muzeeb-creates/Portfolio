@@ -196,7 +196,7 @@ export default function Contact({ identity }) {
                   <div className="socials-label font-mono">PERSONAL NETWORK</div>
                   <div className="socials-pills-row">
                     <a
-                      href="https://github.com/mohammadmujeebkazi"
+                      href="https://github.com/Muzeeb-creates"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="social-pill"
@@ -205,7 +205,7 @@ export default function Contact({ identity }) {
                       <span>GitHub</span>
                     </a>
                     <a
-                      href="https://linkedin.com"
+                      href="https://www.linkedin.com/in/muzeeb-kazi-476516440"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="social-pill"
@@ -223,7 +223,7 @@ export default function Contact({ identity }) {
                       <span>Twitter / X</span>
                     </a>
                     <a
-                      href="https://instagram.com/YOUR_INSTAGRAM_HANDLE" /* PLACEHOLDER: Replace with your personal Instagram URL */
+                      href="https://www.instagram.com/muzeeb__kazi?srtk=Z2lxa2gzdW10dDZh"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="social-pill"

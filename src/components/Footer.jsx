@@ -74,13 +74,13 @@ export default function Footer({ activeIdentity, onSelectIdentity }) {
             <h4 className="footer-col-title font-mono">CONNECT</h4>
             <ul className="footer-links-list">
               <li>
-                <a href="https://github.com/mohammadmujeebkazi" target="_blank" rel="noopener noreferrer" className="footer-ext-link">
+                <a href="https://github.com/Muzeeb-creates" target="_blank" rel="noopener noreferrer" className="footer-ext-link">
                   <Github size={14} />
                   <span>GitHub</span>
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-ext-link">
+                <a href="https://www.linkedin.com/in/muzeeb-kazi-476516440" target="_blank" rel="noopener noreferrer" className="footer-ext-link">
                   <Linkedin size={14} />
                   <span>LinkedIn</span>
                 </a>
